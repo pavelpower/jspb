@@ -32,7 +32,7 @@ if (require.main == module) {
             }
         });
 
-        var templates = [], list, filesParser, FilesParser = require('./lib/FilesParser.js');
+        var templates = [], filesParser, FilesParser = require('./lib/FilesParser.js');
 
         tmps.forEach(function(tmp) {
             templates.push(require(tmp));
