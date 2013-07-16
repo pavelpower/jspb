@@ -1,103 +1,95 @@
 #!/usr/bin/env node
 
-function spplant(str, o) {
-    return str.replace(/{([^{}]*)}/g,
-        function(a, b) {
-            var r = o[b];
+var yaml   = require('js-yaml'),
+    colors = require('colors');
 
-            if (r == null)
-                return '';
+var settings = require('./settings.yml');
 
-            return typeof r === 'string' || typeof r === 'number' ? r : a;
+// set them for console text
+colors.setTheme(settings.colors_theme);
+
+var _params = settings.default_params, key, pusher, params;
+
+pusher = {
+    '-i': {
+        help: 'file name - the enter point.',
+        read: function(p) {
+            _params.file_name = p;
         }
-    );
-}
+    },
+    '-r': {
+        help: 'templates for read.',
+        read:  function(p) {
+            if (_params.temps_read === settings.default_params.temps_read) {
+                _params.temps_read = [];
+            }
+
+            _params.temps_read.push(p);
+        }
+    },
+    '-w': {
+        help: 'template for write path (from blank) to output.',
+        read: function(p) {
+            _params.temp_write = p;
+        }
+    },
+    '-d': {
+        help: 'flag on debug.',
+        read: function() {
+            _params.debug = true;
+        }
+    }
+};
 
 if (require.main == module) {
-    var include,
-        output = 'output.js',
-        // sample template for borschik
-        // http://en.bem.info/articles/borschik/
-        temp_output = '//[{level}] {blank} {error}\r\n/*borschik:include:{path}*/',
-        tmps = [],
-        key,
-        pusher,
-        params = process.argv.slice(2),
-        strParams = params.join(' ');
+    // read params
+    params = process.argv.slice(2);
 
     // show help
-    if (strParams.indexOf('-h') > -1 || strParams.indexOf('--help') > -1) {
-        console.log('help: show help');
-    } else {
-
-        pusher = {
-            '-i': function(p) {
-                include = p
-            },
-            '-p': function(p) {
-                tmps.push(p);
-            },
-            '-o': function(p) {
-                output = p;
-            },
-            '-t': function(p) {
-                temp_output = p;
-            }
-        };
-
-        params.forEach(function (p) {
-            if (/^-/.test(p)) {
-                key = p;
-            }
-
-            if (key != null && key !== p) {
-               pusher[key](p);
-            }
-        });
-
-        var templates = [], filesParser, FilesParser = require('./lib/FilesParser.js');
-
-        tmps.forEach(function(tmp) {
-            templates.push(require(tmp));
-        });
-
-        if (templates.length === 0) {
-            templates = [require('./templates/extjs4.js')];
-        }
-
-        filesParser = new FilesParser(templates);
-
-        filesParser.read(include, true, function() {
-            var output_content, links = filesParser.getListLinks();
-
-            console.log('links.length:', links.length);
-
-            if (links) {
-
-                output_content = links.map(function(link) {
-                    console.log('-----link--------');
-                    console.log('blank:', link.blank);
-                    console.log('path:', link.path);
-                    console.log('level:', link.level);
-                    console.log('error:', link.error);
-
-                    return spplant(temp_output, link);
-                }).join('\r\n');
-
-                if (output != null) {
-                    require('fs').writeFile(output, output_content, function (err) {
-                        if (err) throw err;
-                        console.log('It\'s saved to ', output);
-                    });
-                }
-
-            } else {
-                console.log('links is NULL:', links);
-            }
-        });
-
-
-
+    if (params.indexOf('-h') > -1) {
+        showHelp();
+        return
     }
 
+    params.forEach(function (p) {
+        if (/^-/.test(p)) {
+            key = p;
+        }
+
+        if (key != null && key !== p && pusher[key]) {
+           pusher[key].read(p);
+        }
+    });
+
+    _params.temps_read =  _params.temps_read.map(function(p) {
+        return require(p);
+    });
+
+    require('./jspb').parse(_params.temps_read, _params.temp_write, _params.file_name, function(result) {
+        if (!_params.debug) {
+            console.log(result);
+            return;
+        }
+        showInfo(this);
+    }, true);
+}
+
+function showHelp() {
+    var param;
+    console.log('Mini help:'.info);
+    for (p in pusher) {
+        param = pusher[p];
+        console.log(p.warn, param.help.info);
+    }
+    console.log();
+}
+
+function showInfo(links) {
+    links.forEach(function(link) {
+        console.log('[' + link.level + ']-------------'.warn);
+        console.log('blank:'.info, link.blank);
+        console.log('path:'.info, link.path);
+        console.log('level:'.info, link.level);
+        console.log('error:'.info, link.error);
+    })
 }

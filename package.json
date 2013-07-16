@@ -20,5 +20,12 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pavelpower/jspb/issues"
+  },
+  "dependencies": {
+    "js-yaml": "*",
+    "colors": "*"
   }
+
+
+
 }
