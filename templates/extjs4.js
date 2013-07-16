@@ -19,8 +19,8 @@ function _requires (content) {
     return result;
 }
 
-function _extend (content) {
-    var rgx = /extend:\s*['"]([^'"]*)['"]/gim,
+function _extend_requires (content) {
+    var rgx = /extend|requires:\s*['"]([^'"]*)['"]/gim,
         requires_line = content.match(rgx);
 
     if (requires_line == null)
@@ -48,7 +48,7 @@ module.exports = {
     getBlanks: function(content) {
         var blanks;
         blanks = _requires(content);
-        blanks = blanks.concat(_extend(content));
+        blanks = blanks.concat(_extend_requires(content));
         return blanks;
     }
 };
