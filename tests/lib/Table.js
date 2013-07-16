@@ -7,3 +7,10 @@
  */
 
 alert('Table.js');
+Ext.define('Table', {
+
+    requires: [
+        'Ext.grid.Table',
+        'Row'
+    ]
+});

@@ -1,1 +1,3 @@
-alert('MessageBox');
+Ext.define('MessageBox', {
+
+});
