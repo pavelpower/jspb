@@ -8,7 +8,7 @@ colors_theme:
 
 default_params:
   # enter point
-  file_name: ./tests/TPanel.js
+  file_path: ./tests/TPanel.js
 
   # sample template for Extjs 4 or Sencha Touch
   temps_read:
