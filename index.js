@@ -63,10 +63,6 @@ if (require.main == module) {
         showSettings(_params)
     }
 
-    _params.temps_read =  _params.temps_read.map(function(p) {
-        return require(p);
-    });
-
     require('./jspb').parse(_params.temps_read, _params.temp_write, _params.file_path, function(result) {
         if (!_params.debug) {
             console.log(result);
