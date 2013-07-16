@@ -10,7 +10,7 @@ function _requires (content) {
             var names = l.match(rgx_Name);
             if (names) {
                 result = result.concat(names.map(function(p) {
-                    return p.replace(/'"/gim,'').trim();
+                    return p.replace(/['"]*/gim,'').trim();
                 }));
             }
         });
