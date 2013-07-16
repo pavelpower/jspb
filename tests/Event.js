@@ -6,14 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-Ext.define('Table', {
-
-    mixins: {
-        observer: "Observer"
-    },
-
-    requires: [
-        'Ext.grid.Table',
-        'Row'
-    ]
+Ext.define('Event', {
+    require: ['Ext.lib.Table']
 });

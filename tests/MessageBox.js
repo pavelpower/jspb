@@ -1,3 +1,5 @@
 Ext.define('MessageBox', {
-    requires: 'Alert'
+    mixins: {
+        alert: 'Alert'
+    }
 });
