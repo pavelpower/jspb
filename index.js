@@ -1,7 +1,24 @@
 #!/usr/bin/env node
 
+function spplant(str, o) {
+    return str.replace(/{([^{}]*)}/g,
+        function(a, b) {
+            var r = o[b];
+
+            if (r == null)
+                return '';
+
+            return typeof r === 'string' || typeof r === 'number' ? r : a;
+        }
+    );
+}
+
 if (require.main == module) {
     var include,
+        output = 'output.js',
+        // sample template for borschik
+        // http://en.bem.info/articles/borschik/
+        temp_output = '//[{level}] {blank} {error}\r\n/*borschik:include:{path}*/',
         tmps = [],
         key,
         pusher,
@@ -19,6 +36,12 @@ if (require.main == module) {
             },
             '-p': function(p) {
                 tmps.push(p);
+            },
+            '-o': function(p) {
+                output = p;
+            },
+            '-t': function(p) {
+                temp_output = p;
             }
         };
 
@@ -45,18 +68,29 @@ if (require.main == module) {
         filesParser = new FilesParser(templates);
 
         filesParser.read(include, true, function() {
-            var links = filesParser.getListLinks();
+            var output_content, links = filesParser.getListLinks();
 
             console.log('links.length:', links.length);
 
             if (links) {
-                links.forEach(function(link) {
+
+                output_content = links.map(function(link) {
                     console.log('-----link--------');
                     console.log('blank:', link.blank);
                     console.log('path:', link.path);
                     console.log('level:', link.level);
                     console.log('error:', link.error);
-                });
+
+                    return spplant(temp_output, link);
+                }).join('\r\n');
+
+                if (output != null) {
+                    require('fs').writeFile(output, output_content, function (err) {
+                        if (err) throw err;
+                        console.log('It\'s saved to ', output);
+                    });
+                }
+
             } else {
                 console.log('links is NULL:', links);
             }
