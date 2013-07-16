@@ -1,7 +1,7 @@
 
 function _requires (content) {
     var rgx = /requires\s*:\s*\[[^\[\]]+\]/gim,
-        rgx_Name = /['|"]([^'",]*)['|"]/gim,
+        rgx_Name = /['"]([^'",]*)['"]/gim,
         requires_lines = content.match(rgx),
         result = [];
 
