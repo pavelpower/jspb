@@ -1,6 +1,6 @@
 
 function _requires (content) {
-    var rgx = /requires\s*:\s*\[[^\[\]]+\]/gim,
+    var rgx = /(?:requires|mixins)\s*:\s*\[([^\[\]]+)\]/gim,
         rgx_Name = /['"]([^'",]*)['"]/gim,
         requires_lines = content.match(rgx),
         result = [];
@@ -20,7 +20,7 @@ function _requires (content) {
 }
 
 function _extend_requires (content) {
-    var rgx = /extend|requires:\s*['"]([^'"]*)['"]/gim,
+    var rgx = /(?:extend|requires|mixins):\s*['"]([^'"]*)['"]/gim,
         requires_line = content.match(rgx);
 
     if (requires_line == null)
