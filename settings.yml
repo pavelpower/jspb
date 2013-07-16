@@ -1,0 +1,21 @@
+
+# for console
+colors_theme:
+  info: cyan
+  warn: yellow
+  debug: blue
+  error: red
+
+default_params:
+  # enter point
+  file_name: ./tests/TPanel.js
+
+  # sample template for Extjs 4 or Sencha Touch
+  temps_read:
+    - ./templates/extjs4.js
+
+  # sample template for borschik
+  # http://en.bem.info/articles/borschik/
+  temp_write: //[{level}] {blank} {error}\r\n/*borschik:fname:{path}*/
+
+  debug: false
