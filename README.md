@@ -1,46 +1,63 @@
 jspb
 ====
 
-parser pieces for assembly files
-
+The parser files to create a workpiece for the builder files.
+Returns an one instance of the file path for the assembly.
+And in the reverse order from the input graph.
 
 
 #Sample
 
+read and change file "settings.yml"
+section "default_params"
+
 ```bash
-node index.js -i ./tests/TPanel.js -r ./tests
+jspb -d
 ```
+or
+
+```bash
+cd ./jspb/index.js -d
+```
+
 
 #use in node
 
 ```javascript
+ require('js-yaml');
+ // you can read default setting from out file
+ var settings = require('./settings.yml');
 
- var FilesParser = require('./lib/FilesParser.js');
+ var _params = settings.default_params;
 
- // you can use many templates
- filesParser = new FilesParser([require('./templates/extjs4.js')]);
+ // _params.temps_read {Array}  sample: [ 'path_to_temp_read {String}', 'path_to_temp_read {String}', .. ]
+ //  temp_read - the node module with fn getPath and fn getBlanks
+ // _params.temp_write {String} string for output. sample for jossy: //#require:{path}
+ // _params.file_path {String} path to file entry-point
+ // _params.withPointFile - flag, include entry-point to output?
 
- // and
- // main.js - enter point
- // true - added in output list enter point (false - no)?
- // fn - callback after parse and create list
- filesParser.read('main.js', true, function() {
-     var links = filesParser.getListLinks();
+ require('jspb').parse(
+    _params.temps_read,
+    _params.temp_write,
+    _params.file_path,
+    function(result) {
+     var links = this;
 
-     console.log('links.length:', links.length);
-
-     if (links) {
-         links.forEach(function(link) {
-             console.log('-----link--------');
-             console.log('blank:', link.blank);
-             console.log('path:', link.path);
-             console.log('level:', link.level);
-             console.log('error:', link.error);
-         });
-     } else {
-         console.log('links is NULL:', links);
+     if (!_params.debug) {
+        console.log(result);
+        return;
      }
- });
+
+     links.forEach(function(link) {
+          console.log('-----link--------');
+          console.log('blank:', link.blank);
+          console.log('path:', link.path);
+          console.log('level:', link.level);
+          console.log('error:', link.error);
+      });
+
+
+ }, _params.withPointFile);
 
 ```
 

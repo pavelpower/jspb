@@ -4,7 +4,7 @@ Ext.application({
 
     requires: [
         'Ext.lib.Table',
-        "Ext.MessageBox"
+        "MessageBox"
     ],
 
     views: [

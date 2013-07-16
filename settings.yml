@@ -7,7 +7,7 @@ colors_theme:
   error: red
 
 default_params:
-  # enter point
+  # entry-point file
   file_path: ./tests/TPanel.js
 
   # sample template for Extjs 4 or Sencha Touch
