@@ -32,6 +32,8 @@ colors.setTheme(settings.colors_theme);
             showSettings(_params)
         }
 
+        _params.temp_write = _params.temp_write.replace(/\\r/gim, '\r').replace(/\\n/gim, '\n');
+
         require('./jspb').parse(_params.temps_read, _params.temp_write, _params.file_path, function(result) {
             if (!_params.debug) {
                 console.log(result);

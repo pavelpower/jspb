@@ -24,8 +24,26 @@ You can use another settings file
 ```bash
 ./jspb/index.js -s file_path_to_your_settings
 ```
+##How work it?
 
-#use in node
+Run with default params look settings.yml
+```bash
+./jspb/index.js >> output.js
+```
+and look file output.js:
+```javascript
+//[4] Event \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Event.js*/
+//[3] Alert \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Alert.js*/
+//[2] Ext.grid.Table \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/grid/Table.js*/
+//[2] Row \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Row.js*/
+//[2] Observer \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Observer.js*/
+//[1] Ext.lib.Table \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/lib/Table.js*/
+//[1] MessageBox \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/MessageBox.js*/
+//[0] root \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/TPanel.js*/
+```
+
+
+#Use in node
 
 ```javascript
  require('js-yaml');

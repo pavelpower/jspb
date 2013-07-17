@@ -8,6 +8,6 @@ params:
 
   # sample template for borschik
   # http://en.bem.info/articles/borschik/
-  temp_write: //[{level}] {blank} {error}\r\n/*borschik:fname:{path}*/
+  temp_write: \r\n//[{level}] {blank} {error}:\r\n/*borschik:fname:{path}*/
 
   debug: true
