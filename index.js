@@ -12,7 +12,7 @@ colors.setTheme(settings.colors_theme);
 
     if (require.main == module) {
 
-        var fname, params, _params = settings.default_params;
+        var fname, params, _params = settings.params;
 
         // read params
         params = process.argv.slice(2);

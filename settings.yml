@@ -6,7 +6,7 @@ colors_theme:
   debug: blue
   error: red
 
-default_params:
+params:
   # entry-point file
   file_path: ./tests/TPanel.js
 
