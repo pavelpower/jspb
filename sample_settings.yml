@@ -1,0 +1,13 @@
+params:
+  # entry-point file
+  file_path: ./tests/lib/Table.js
+
+  # sample template for Extjs 4 or Sencha Touch
+  temps_read:
+    - ./templates/extjs4.js
+
+  # sample template for borschik
+  # http://en.bem.info/articles/borschik/
+  temp_write: //[{level}] {blank} {error}\r\n/*borschik:fname:{path}*/
+
+  debug: true
