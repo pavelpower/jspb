@@ -32,14 +32,29 @@ Run with default params look settings.yml
 ```
 and look file output.js:
 ```javascript
-//[4] Event \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Event.js*/
-//[3] Alert \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Alert.js*/
-//[2] Ext.grid.Table \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/grid/Table.js*/
-//[2] Row \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Row.js*/
-//[2] Observer \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/Observer.js*/
-//[1] Ext.lib.Table \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/lib/Table.js*/
-//[1] MessageBox \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/MessageBox.js*/
-//[0] root \r\n/*borschik:fname:/home/pavpow/Projects/jspb/tests/TPanel.js*/
+//[4] Event :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/Event.js*/
+
+//[3] Alert :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/Alert.js*/
+
+//[2] Ext.grid.Table :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/grid/Table.js*/
+
+//[2] Row :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/Row.js*/
+
+//[2] Observer :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/Observer.js*/
+
+//[1] Ext.lib.Table :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/lib/Table.js*/
+
+//[1] MessageBox :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/MessageBox.js*/
+
+//[0] root :
+/*borschik:fname:/home/pavpow/Projects/jspb/tests/TPanel.js*/
 ```
 
 
