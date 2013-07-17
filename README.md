@@ -17,9 +17,13 @@ jspb -d
 or
 
 ```bash
-cd ./jspb/index.js -d
+./jspb/index.js -d
 ```
 
+You can use another settings file
+```bash
+./jspb/index.js -s file_path_to_your_settings
+```
 
 #use in node
 
