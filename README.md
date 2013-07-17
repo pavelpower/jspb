@@ -5,6 +5,10 @@ The parser files to create a workpiece for the builder files.
 Returns an one instance of the file path for the assembly.
 And in the reverse order from the input graph.
 
+#Install
+```bash
+npm install jspb
+```
 
 #Sample
 
